@@ -28,23 +28,18 @@ class Links extends IteratorIterator
         }
 
         $href = '';
-        if ($node->hasAttribute('href')) {
-            $href = $node->getAttribute('href');
-        }
-
-        $rel = '';
-        if ($node->hasAttribute('rel')) {
-            $rel = $node->getAttribute('rel');
-        }
-
+        $rels = [];
         $attributes = [];
         foreach ($node->attributes as $domAttr) {
-            if (in_array($domAttr->name, ['href', 'rel'])) {
-                continue;
+            if (strlen($href) === 0 && $domAttr->name === 'href') {
+                $href = $domAttr->value;
+            } else if ($domAttr->name === 'rel') {
+                $rels[] = $domAttr->value;
+            } else {
+                $attributes[$domAttr->name] = $domAttr->value;
             }
-            $attributes[$domAttr->name] = $domAttr->value;
         }
 
-        return new Link($href, $rel, $attributes);
+        return new Link($href, false, $rels, $attributes);
     }
 }

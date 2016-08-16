@@ -2,18 +2,35 @@
 
 namespace Diggin\Link;
 
-use Psr\Http\Link\LinkInterface;
+use Psr\Link\LinkInterface;
 
 class Link implements LinkInterface
 {
+    /**
+     * @var string
+     */
     private $href;
-    private $rel;
+
+    /**
+     * @var bool
+     */
+    private $isTemplated;
+
+    /**
+     * @var array
+     */
+    private $rels;
+
+    /**
+     * @var array
+     */
     private $attributes;
 
-    public function __construct($href = null, $rel = null, $attributes = [])
+    public function __construct($href = '', $isTemplated = false, $rels = [], $attributes = [])
     {
         $this->href = $href;
-        $this->rel = $rel;
+        $this->isTemplated = $isTemplated;
+        $this->rels = $rels;
         $this->attributes = $attributes;
     }
 
@@ -28,9 +45,17 @@ class Link implements LinkInterface
     /**
      * @inheritdoc
      */
-    public function getRel()
+    public function isTemplated()
     {
-        return $this->rel;
+        return $this->isTemplated;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getRels()
+    {
+        return $this->rels;
     }
 
     /**

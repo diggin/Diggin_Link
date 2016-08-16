@@ -4,6 +4,7 @@ namespace DigginTest\Link;
 
 use DOMDocument;
 use DOMXPath;
+use Psr\Link\LinkInterface;
 use Diggin\Link\DomLinkCollection;
 
 use PHPUnit_Framework_TestCase;
@@ -33,11 +34,11 @@ class DomLinkCollectionTest extends PHPUnit_Framework_TestCase
 
         // check 1st link   <link rel="alternate" href="/topic/rss" type="application/rss+xml">
         $first = $links->current();
-        $this->assertInstanceOf('Psr\\Http\Link\\LinkInterface', $first);
+        $this->assertInstanceOf(LinkInterface::class, $first);
         $this->assertArrayHasKey('type', $first->getAttributes());
         $this->assertSame('application/rss+xml', $first->getAttributes()['type']);
         $this->assertSame('/topic/rss', $first->getHref());
-        $this->assertSame('alternate', $first->getRel());
+        $this->assertSame('alternate', current($first->getRels()));
     }
 
     public function testFindByGetLinksByRelMethod()
@@ -48,9 +49,9 @@ class DomLinkCollectionTest extends PHPUnit_Framework_TestCase
 
         $this->assertTrue($links->valid());
         $first = $links->current();
-        $this->assertInstanceOf('Psr\\Http\Link\\LinkInterface', $first);
+        $this->assertInstanceOf(LinkInterface::class, $first);
         $this->assertSame('/bootstrap/css/bootstrap.min.css', $first->getHref());
-        $this->assertSame('stylesheet', $first->getRel());
+        $this->assertSame('stylesheet', current($first->getRels()));
     }
 
 }

@@ -2,7 +2,7 @@
 namespace Diggin\Link;
 
 use DOMXPath;
-use Psr\Http\Link\LinkCollectionInterface;
+use Psr\Link\LinkCollectionInterface;
 
 class DomLinkCollection implements LinkCollectionInterface
 {
