@@ -5,14 +5,14 @@ namespace DigginTest\Link;
 use DOMDocument;
 use DOMXPath;
 use Psr\Link\LinkInterface;
-use Diggin\Link\DomLinkCollection;
+use Diggin\Link\DomLinkProvider;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class DomLinkCollectionTest extends PHPUnit_Framework_TestCase
+class DomLinkProviderTest extends TestCase
 {
     /**
-     * @var DomLinkCollection
+     * @var DomLinkProvider
      */
     private $linkCollection;
 
@@ -23,7 +23,7 @@ class DomLinkCollectionTest extends PHPUnit_Framework_TestCase
         $dom = new DOMDocument('1.0');
         $dom->loadHTML($html);
         $domXpath = new DOMXPath($dom);
-        $this->linkCollection = new DomLinkCollection($domXpath);
+        $this->linkCollection = new DomLinkProvider($domXpath);
     }
 
     public function testFindByGetLinksMethod()
@@ -53,5 +53,4 @@ class DomLinkCollectionTest extends PHPUnit_Framework_TestCase
         $this->assertSame('/bootstrap/css/bootstrap.min.css', $first->getHref());
         $this->assertSame('stylesheet', current($first->getRels()));
     }
-
 }

@@ -1,10 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Diggin\Link;
 
 use DOMXPath;
-use Psr\Link\LinkCollectionInterface;
+use Psr\Link\LinkProviderInterface;
 
-class DomLinkCollection implements LinkCollectionInterface
+final class DomLinkProvider implements LinkProviderInterface
 {
     /**
      * @var DOMXPath
@@ -16,7 +19,7 @@ class DomLinkCollection implements LinkCollectionInterface
     private $linksByRel;
 
     /**
-     * DomLinkCollection constructor.
+     * DomLinkProvider constructor.
      * @param DOMXPath $domXpath
      */
     public function __construct(DOMXPath $domXpath)
@@ -56,6 +59,5 @@ class DomLinkCollection implements LinkCollectionInterface
         $this->linksByRel->rewind();
 
         return $this->linksByRel;
-
     }
 }

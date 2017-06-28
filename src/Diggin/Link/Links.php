@@ -1,9 +1,12 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Diggin\Link;
 
 use IteratorIterator;
 
-class Links extends IteratorIterator
+final class Links extends IteratorIterator
 {
     public function valid()
     {

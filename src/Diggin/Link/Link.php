@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Diggin\Link;
 
 use Psr\Link\LinkInterface;
 
-class Link implements LinkInterface
+final class Link implements LinkInterface
 {
     /**
      * @var string
@@ -26,7 +28,7 @@ class Link implements LinkInterface
      */
     private $attributes;
 
-    public function __construct($href = '', $isTemplated = false, $rels = [], $attributes = [])
+    public function __construct(string $href = '', bool $isTemplated = false, array $rels = [], array $attributes = [])
     {
         $this->href = $href;
         $this->isTemplated = $isTemplated;
