@@ -1,10 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Diggin\Link;
 
 use Iterator;
 use DOMNodeList;
 
-class DOMNodeListIterator implements Iterator
+final class DOMNodeListIterator implements Iterator
 {
     private $position = 0;
     private $domNodeList;
